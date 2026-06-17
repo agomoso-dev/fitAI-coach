@@ -69,4 +69,7 @@ Desktop.ini
 *~
 ._*
 
-
+# Vite
+.vite/
+dist/
+node_modules/

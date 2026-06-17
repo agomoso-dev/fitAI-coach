@@ -1,10 +1,10 @@
-#  FitAi Coach
+#  fitcoach
 
-FitAi Coach es un proyecto innovador que busca transformar la manera en la que las personas planifican y realizan sus entrenamientos. Su objetivo es crear un espacio en español, accesible y dinámico, donde cualquier persona que practique deporte pueda organizar, personalizar y automatizar sus rutinas semanales con Inteligencia Artificial.
+fitcoach es un proyecto innovador que busca transformar la manera en la que las personas planifican y realizan sus entrenamientos. Su objetivo es crear un espacio en español, accesible y dinámico, donde cualquier persona que practique deporte pueda organizar, personalizar y automatizar sus rutinas semanales con Inteligencia Artificial.
 
-##  ¿Qué es FitAi Coach?
+##  ¿Qué es fitcoach?
 
-FitAI Coach es una plataforma que permitirá:
+fitcoach es una plataforma que permitirá:
 
 * Agregar y personalizar cualquier tipo de ejercicio.
 * Automatizar la planificación de entrenamientos semanales.
@@ -24,4 +24,4 @@ El proyecto está siendo desarrollado con las siguientes tecnologías:
 
 ##  Misión
 
-Crear una herramienta intuitiva que facilite el acceso a planes de entrenamiento efectivos, eliminando la necesidad de organizar manualmente cada rutina. Con FitAi Coach, el usuario podrá centrarse en lo más importante: entrenar y mejorar su rendimiento.
+Crear una herramienta intuitiva que facilite el acceso a planes de entrenamiento efectivos, eliminando la necesidad de organizar manualmente cada rutina. Con fitcoach, el usuario podrá centrarse en lo más importante: entrenar y mejorar su rendimiento.
