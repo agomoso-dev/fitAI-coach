@@ -1,13 +1,14 @@
 services:
   # Backend 
   backend:
-    container_name: backend_gymautoma_app
-    image: backend_gymautoma_image
+    container_name: backend_fitcoach_app
+    image: backend_fitcoach_image
     build:
       context: ./backend
     restart: unless-stopped
     volumes:
       - ./backend:/app
+      - ./schema_training_rts_ai.sql:/app/schema_training_rts_ai.sql:ro
     ports:
       - '127.0.0.1:5000:5000'
     environment:
@@ -17,30 +18,30 @@ services:
     depends_on:
       - db
     networks:
-      - gymautoma
+      - fitcoach
 
   # Frontend 
   frontend:
-    container_name: frontend_gymautoma_app
-    image: frontend_gymautoma_image
+    container_name: frontend_fitcoach_app
+    image: frontend_fitcoach_image
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
     restart: unless-stopped
     volumes:
       - ./frontend:/app
-      - /app/node_modules
+      - /app/fitai-coach-cli/node_modules
     ports:
       - '127.0.0.1:3000:3000'
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - REACT_APP_API_URL=http://localhost:5005/api
+      - VITE_API_URL=http://localhost:5000/api
     networks:
-      - gymautoma
+      - fitcoach
 
   # Base de datos PostgreSQL
   db:
-    container_name: db_gymautoma_app
+    container_name: db_fitcoach_app
     image: postgres:15-alpine
     restart: unless-stopped
     environment:
@@ -50,17 +51,18 @@ services:
       - POSTGRES_PORT=${DB_PORT}
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./schema_training_rts_ai.sql:/docker-entrypoint-initdb.d/schema_training_rts_ai.sql:ro
     ports:
       - "5432:5432"
     networks:
-      - gymautoma
+      - fitcoach
       
   # FastAPI app (modelo + API)
   fastapi:
-    container_name: fastapi_gymautoma_app
+    container_name: fastapi_fitcoach_app
     build:
       context: ./fastapi-app
-    image: docker-gymautoma-fastapi
+    image: docker-fitcoach-fastapi
     environment:
       - OLLAMA_SERVER_URL=http://ollama:11434
     ports:
@@ -68,22 +70,22 @@ services:
     depends_on:
       - ollama
     networks:
-      - gymautoma
+      - fitcoach
 
   # Ollama 
   ollama:
     image: ollama/ollama:latest
-    container_name: ollama_gymautoma_app
+    container_name: ollama_fitcoach_app
     ports:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
     networks:
-      - gymautoma  
+      - fitcoach  
 
 volumes:
   db_data:
   ollama_data:
 networks:
-  gymautoma:
+  fitcoach:
     driver: bridge

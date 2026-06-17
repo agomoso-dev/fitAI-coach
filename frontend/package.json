@@ -1,13 +1,13 @@
 {
-  "name": "gymautoma-frontend",
+  "name": "fitcoach-frontend",
   "version": "1.0.0",
-  "description": "Frontend for GymAutoma AI Training Assistant",
+  "description": "Frontend for fitcoach AI Training Assistant",
   "private": true,
   "scripts": {
-    "dev": "cd gymautoma-client && npm run dev",
-    "build": "cd gymautoma-client && npm run build",
-    "preview": "cd gymautoma-client && npm run preview",
-    "lint": "cd gymautoma-client && npm run lint"
+    "dev": "cd fitai-coach-cli && npm run dev",
+    "build": "cd fitai-coach-cli && npm run build",
+    "preview": "cd fitai-coach-cli && npm run preview",
+    "lint": "cd fitai-coach-cli && npm run lint"
   },
   "keywords": ["react", "vite", "gym", "ai", "training"],
   "author": "",

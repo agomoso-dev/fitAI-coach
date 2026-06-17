@@ -11,7 +11,8 @@ COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copiar el código del proyecto
-COPY ./gymautoma_core /app/gymautoma_core
+COPY ./config /app/config
+COPY ./api /app/api
 COPY manage.py /app/
 
 # Script para esperar a que la base de datos esté lista
