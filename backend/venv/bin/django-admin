@@ -1,4 +1,4 @@
-#!/home/antonio/ProyectGymautoma/backend/venv/bin/python
+#!/home/antonio/Proyectfitcoach/backend/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

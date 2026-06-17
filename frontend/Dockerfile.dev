@@ -1,19 +1,12 @@
 FROM node:20-alpine
 
-# Crear directorio de trabajo
-WORKDIR /app
+WORKDIR /app/fitai-coach-cli
 
-# Copiar los archivos necesarios
-COPY package*.json ./
-
-# Instalar dependencias
+COPY fitai-coach-cli/package*.json ./
 RUN npm install
 
-# Copiar el resto del código
-COPY . .
+COPY fitai-coach-cli/ ./
 
-# Exponer el puerto del servidor de desarrollo de React
 EXPOSE 3000
 
-# Comando para iniciar el servidor de desarrollo
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["npm", "run", "dev"]
