@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-import { login } from '../services/api'
+import { login } from '../../services/api'
+import { getLoginError } from '../../utils/errors'
 
 export function LoginPage({ onLogin }) {
   const [form, setForm] = useState({ email: '', password: '' })
@@ -21,7 +22,7 @@ export function LoginPage({ onLogin }) {
       const user = await login(form)
       onLogin(user)
     } catch (error) {
-      setStatus(error.message)
+      setStatus(getLoginError(error))
     } finally {
       setLoading(false)
     }
@@ -35,8 +36,8 @@ export function LoginPage({ onLogin }) {
       </header>
 
       <label>
-        Email
-        <input name="email" type="email" value={form.email} onChange={updateField} required />
+        Email o usuario
+        <input name="email" value={form.email} onChange={updateField} required />
       </label>
 
       <label>
@@ -48,7 +49,7 @@ export function LoginPage({ onLogin }) {
         {loading ? 'Validando...' : 'Entrar'}
       </button>
 
-      {status && <p className="status error">{status}</p>}
+      {status && <div className="form-alert error">{status}</div>}
     </form>
   )
 }

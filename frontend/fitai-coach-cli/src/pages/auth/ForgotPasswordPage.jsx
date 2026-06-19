@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { requestPasswordReset } from '../services/api'
+import { requestPasswordReset } from '../../services/api'
 
 export function ForgotPasswordPage() {
   const [email, setEmail] = useState('')

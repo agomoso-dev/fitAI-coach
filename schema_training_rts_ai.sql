@@ -50,10 +50,45 @@ CREATE TABLE IF NOT EXISTS users (
     first_name VARCHAR(120),
     last_name VARCHAR(120),
     role user_role NOT NULL DEFAULT 'athlete',
+    age SMALLINT,
+    sex VARCHAR(20) NOT NULL DEFAULT 'unknown',
+    height_cm NUMERIC(5,2),
+    weight_kg NUMERIC(5,2),
+    daily_physical_effort VARCHAR(20) NOT NULL DEFAULT 'moderate',
+    training_experience_months INTEGER NOT NULL DEFAULT 0,
+    training_goal TEXT,
+    medical_notes TEXT,
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+ALTER TABLE users ADD COLUMN IF NOT EXISTS age SMALLINT;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS sex VARCHAR(20) NOT NULL DEFAULT 'unknown';
+ALTER TABLE users ADD COLUMN IF NOT EXISTS height_cm NUMERIC(5,2);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS weight_kg NUMERIC(5,2);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS daily_physical_effort VARCHAR(20) NOT NULL DEFAULT 'moderate';
+ALTER TABLE users ADD COLUMN IF NOT EXISTS training_experience_months INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS training_goal TEXT;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS medical_notes TEXT;
+
+CREATE TABLE IF NOT EXISTS password_reset_requests (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    email VARCHAR(255) NOT NULL,
+    token VARCHAR(128) UNIQUE NOT NULL,
+    reset_url TEXT NOT NULL,
+    is_used BOOLEAN NOT NULL DEFAULT FALSE,
+    requested_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    expires_at TIMESTAMP NOT NULL,
+    used_at TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_password_reset_requests_user_requested
+ON password_reset_requests(user_id, requested_at DESC);
+
+CREATE INDEX IF NOT EXISTS idx_password_reset_requests_token
+ON password_reset_requests(token);
 
 CREATE TABLE IF NOT EXISTS athlete_profiles (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -447,4 +482,3 @@ VALUES
 (5, 8.5, 82.400, 'base'),
 (5, 8.0, 81.100, 'base')
 ON CONFLICT (reps, rpe, source) DO NOTHING;
-

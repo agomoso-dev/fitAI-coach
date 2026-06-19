@@ -1,7 +1,10 @@
 from pathlib import Path
 
+from django.contrib.auth.hashers import make_password
 from django.core.management.base import BaseCommand
 from django.db import connection
+
+from apps.users.models import User
 
 
 class Command(BaseCommand):
@@ -19,5 +22,16 @@ class Command(BaseCommand):
 
         with connection.cursor() as cursor:
             cursor.execute(sql)
+
+        User.objects.update_or_create(
+            email='admin',
+            defaults={
+                'password_hash': make_password('admin'),
+                'first_name': 'Admin',
+                'last_name': 'FitAI',
+                'role': User.ROLE_ADMIN,
+                'is_active': True,
+            },
+        )
 
         self.stdout.write(self.style.SUCCESS('Training schema applied.'))

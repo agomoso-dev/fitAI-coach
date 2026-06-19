@@ -36,6 +36,7 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - VITE_API_URL=http://localhost:5000/api
+      - VITE_AI_URL=http://localhost:5005
     networks:
       - fitcoach
 
@@ -63,8 +64,11 @@ services:
     build:
       context: ./fastapi-app
     image: docker-fitcoach-fastapi
+    volumes:
+      - ./backend:/app/backend:ro
     environment:
       - OLLAMA_SERVER_URL=http://ollama:11434
+      - PYTHONPATH=/app/backend
     ports:
       - "5005:5005"
     depends_on:
