@@ -3,7 +3,7 @@
 Esta carpeta agrupa la logica de dominio de FitAI Coach.
 
 - `home_feed/`: portada inteligente, feeds deportivos, resumen con IA y calculo de lectura.
-- `users/`: usuarios, autenticacion, recuperacion de contrasena y rutas publicas/admin de usuario.
+- `users/`: usuarios, autenticacion, recuperacion de contraseña y rutas publicas/admin de usuario.
 - `profiles/`: perfiles deportivos de atletas y entrenadores.
 - `nutrition/`: dietas, alimentos y planes nutricionales.
 - `workouts/`: entrenamientos, sesiones, ejercicios y progresion.

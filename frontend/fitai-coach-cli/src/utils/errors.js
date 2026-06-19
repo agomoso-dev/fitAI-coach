@@ -19,7 +19,7 @@ export function getFriendlyError(error, fallback = 'Ha ocurrido un error. Intent
 export function getLoginError(error) {
   const message = getFriendlyError(error, 'No se pudo iniciar sesion.')
   if (message.toLowerCase().includes('credenciales')) {
-    return 'Email o contrasena incorrectos. Revisa los datos e intentalo otra vez.'
+    return 'Email o contraseña incorrectos. Revisa los datos e intentalo otra vez.'
   }
   return message
 }

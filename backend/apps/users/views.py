@@ -1,4 +1,4 @@
-import secrets
+﻿import secrets
 from datetime import timedelta
 
 from django.conf import settings
@@ -33,6 +33,21 @@ class UserViewSet(
 ):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+        user = serializer.save()
+        send_mail(
+            'Cuenta creada en FitAI Coach',
+            (
+                f'Hola {user.first_name or user.email},\n\n'
+                'Tu cuenta de FitAI Coach se ha creado correctamente. '
+                'Ya puedes iniciar sesion y comenzar a preparar tu plan deportivo.\n\n'
+                'Si no solicitaste esta cuenta, contacta con el administrador.'
+            ),
+            getattr(settings, 'DEFAULT_FROM_EMAIL', 'no-reply@fitai-coach.local'),
+            [user.email],
+            fail_silently=True,
+        )
 
     def check_admin_permission(self):
         require_admin_role(self.request)
@@ -80,10 +95,10 @@ class PasswordResetRequestView(APIView):
                 expires_at=timezone.now() + timedelta(hours=24),
             )
             send_mail(
-                'Recuperacion de contrasena FitAI Coach',
+                'Recuperacion de contraseÃ±a FitAI Coach',
                 (
-                    'Se solicito recuperar tu contrasena.\n\n'
-                    f'Usa este enlace para crear una nueva contrasena: {reset_request.reset_url}\n\n'
+                    'Se solicito recuperar tu contraseÃ±a.\n\n'
+                    f'Usa este enlace para crear una nueva contraseÃ±a: {reset_request.reset_url}\n\n'
                     'El enlace caduca en 24 horas. Si no hiciste esta solicitud, ignora este mensaje.'
                 ),
                 getattr(settings, 'DEFAULT_FROM_EMAIL', 'no-reply@fitai-coach.local'),
@@ -102,7 +117,7 @@ class PasswordResetConfirmView(APIView):
         serializer = PasswordResetConfirmSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response({'detail': 'Contrasena actualizada correctamente.'})
+        return Response({'detail': 'contraseÃ±a actualizada correctamente.'})
 
 
 class PasswordResetRequestAdminView(APIView):

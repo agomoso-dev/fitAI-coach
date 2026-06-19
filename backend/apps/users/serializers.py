@@ -33,11 +33,11 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate_password(self, value):
         if len(value) < 8:
-            raise serializers.ValidationError('La contrasena debe tener al menos 8 caracteres.')
+            raise serializers.ValidationError('La contraseña debe tener al menos 8 caracteres.')
         if not any(character.isupper() for character in value):
-            raise serializers.ValidationError('La contrasena debe incluir al menos una mayuscula.')
+            raise serializers.ValidationError('La contraseña debe incluir al menos una mayuscula.')
         if not any(not character.isalnum() for character in value):
-            raise serializers.ValidationError('La contrasena debe incluir al menos un caracter especial.')
+            raise serializers.ValidationError('La contraseña debe incluir al menos un caracter especial.')
         return value
 
     def create(self, validated_data):
@@ -109,11 +109,11 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 
     def validate_password(self, value):
         if len(value) < 8:
-            raise serializers.ValidationError('La contrasena debe tener al menos 8 caracteres.')
+            raise serializers.ValidationError('La contraseña debe tener al menos 8 caracteres.')
         if not any(character.isupper() for character in value):
-            raise serializers.ValidationError('La contrasena debe incluir al menos una mayuscula.')
+            raise serializers.ValidationError('La contraseña debe incluir al menos una mayuscula.')
         if not any(not character.isalnum() for character in value):
-            raise serializers.ValidationError('La contrasena debe incluir al menos un caracter especial.')
+            raise serializers.ValidationError('La contraseña debe incluir al menos un caracter especial.')
         return value
 
     def validate(self, attrs):

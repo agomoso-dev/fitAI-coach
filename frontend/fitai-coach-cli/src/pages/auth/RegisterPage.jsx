@@ -1,6 +1,9 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 
+import { NotificationStack } from '../../features/notifications/NotificationStack'
+import { useNotifications } from '../../hooks/useNotifications'
 import { createUser } from '../../services/api'
+import { getFriendlyError } from '../../utils/errors'
 
 const emptyForm = {
   email: '',
@@ -32,6 +35,7 @@ export function RegisterPage({ onCreated }) {
   const [form, setForm] = useState(emptyForm)
   const [status, setStatus] = useState('')
   const [loading, setLoading] = useState(false)
+  const { notifications, notify, dismiss } = useNotifications()
 
   function updateField(event) {
     const { name, value } = event.target
@@ -51,10 +55,10 @@ export function RegisterPage({ onCreated }) {
 
       await createUser(cleanPayload(form))
       setForm(emptyForm)
-      setStatus('Usuario creado correctamente')
+      notify('Usuario creado. Se ha enviado un correo de confirmacion a su email.', 'success')
       onCreated?.()
     } catch (error) {
-      setStatus(error.message)
+      setStatus(getFriendlyError(error))
     } finally {
       setLoading(false)
     }
@@ -62,18 +66,20 @@ export function RegisterPage({ onCreated }) {
 
   return (
     <form className="stack-form" onSubmit={submit}>
+      <NotificationStack notifications={notifications} onDismiss={dismiss} />
+
       <header>
         <h2>Crear usuario</h2>
         <p>Alta inicial sobre la tabla users del schema PostgreSQL.</p>
       </header>
 
       <label>
-        Email
+        Correo
         <input name="email" type="email" value={form.email} onChange={updateField} required />
       </label>
 
       <label>
-        Password
+        Contrasena
         <input
           name="password"
           type="password"

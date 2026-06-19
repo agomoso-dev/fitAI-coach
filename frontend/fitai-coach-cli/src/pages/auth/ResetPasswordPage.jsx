@@ -18,7 +18,7 @@ export function ResetPasswordPage({ token, onFinished }) {
 
     try {
       if (!hasStrongPassword(password)) {
-        setStatus('La contrasena debe tener 8 caracteres, una mayuscula y un caracter especial.')
+        setStatus('La contraseña debe tener 8 caracteres, una mayuscula y un caracter especial.')
         return
       }
 
@@ -36,12 +36,12 @@ export function ResetPasswordPage({ token, onFinished }) {
   return (
     <form className="stack-form" onSubmit={submit}>
       <header>
-        <h2>Nueva contrasena</h2>
-        <p>Define una contrasena nueva para recuperar el acceso.</p>
+        <h2>Nueva contraseña</h2>
+        <p>Define una contraseña nueva para recuperar el acceso.</p>
       </header>
 
       <label>
-        Nueva contrasena
+        Nueva contraseña
         <input
           type="password"
           value={password}
@@ -54,7 +54,7 @@ export function ResetPasswordPage({ token, onFinished }) {
       </label>
 
       <button type="submit" disabled={loading}>
-        {loading ? 'Actualizando...' : 'Cambiar contrasena'}
+        {loading ? 'Actualizando...' : 'Cambiar contraseña'}
       </button>
 
       {status && <p className="status">{status}</p>}

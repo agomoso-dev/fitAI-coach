@@ -36,12 +36,12 @@ export function LoginPage({ onLogin }) {
       </header>
 
       <label>
-        Email o usuario
+        Correo
         <input name="email" value={form.email} onChange={updateField} required />
       </label>
 
       <label>
-        Password
+        Contraseña
         <input name="password" type="password" value={form.password} onChange={updateField} required />
       </label>
 

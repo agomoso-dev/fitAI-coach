@@ -1,4 +1,4 @@
-#root {
+﻿#root {
   min-height: 100vh;
 }
 
@@ -413,7 +413,9 @@ button:disabled {
 }
 
 .notification-success {
-  border-color: #8bc9ab;
+  border-color: #70b68f;
+  background: #e5f7ec;
+  color: #145b35;
 }
 
 .notification-error {

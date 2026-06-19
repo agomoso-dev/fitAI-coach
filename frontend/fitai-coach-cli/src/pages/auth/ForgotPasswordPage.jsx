@@ -30,7 +30,7 @@ export function ForgotPasswordPage() {
       </header>
 
       <label>
-        Email
+        Correo
         <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
       </label>
 
